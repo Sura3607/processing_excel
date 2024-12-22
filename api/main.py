@@ -1,8 +1,10 @@
 from flask import Flask, request, send_file, jsonify
 import pandas as pd
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 UPLOAD_FOLDER = "/tmp/uploaded_files"
 PROCESSED_FOLDER = "/tmp/processed_files"
@@ -81,7 +83,7 @@ def process_file(input_path, output_path):
                 except KeyError:
                     print(f"Warning: Column '{col_name}' not found in sheet {sheet_name}")
 
-                    
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
