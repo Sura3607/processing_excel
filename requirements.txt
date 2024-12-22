@@ -1,4 +1,4 @@
-Flask==2.2.2
-Flask-CORS==3.1.1
-pandas==2.0.3
-openpyxl==3.1.2  # Nếu bạn cần hỗ trợ cho file Excel (xlsx)
+Flask
+Flask-CORS
+pandas
+openpyxl
