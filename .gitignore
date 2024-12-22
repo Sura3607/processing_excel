@@ -1,0 +1,37 @@
+# Thư mục môi trường ảo Python (nếu bạn sử dụng virtualenv)
+venv/
+env/
+
+# Thư mục cache của Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Thư mục Docker
+docker/
+*.docker/
+
+# Thư mục chứa các tệp tạm thời
+*.log
+*.tmp
+
+# Các tệp cấu hình editor (Ví dụ: Visual Studio Code, PyCharm)
+.vscode/
+.idea/
+
+# Thư mục cài đặt package từ Python
+*.egg-info/
+
+# Thư mục và tệp cài đặt của môi trường của Flask hoặc pip
+*.egg
+dist/
+build/
+*.whl
+
+# Tệp cấu hình cụ thể của hệ thống (Windows, MacOS)
+Thumbs.db
+.DS_Store
+
+# Tệp yêu cầu không cần thiết (ví dụ: tệp cấu hình tạm thời hoặc tệp backup)
+*.bak
+*.swp
