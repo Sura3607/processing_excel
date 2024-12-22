@@ -2,6 +2,23 @@
 <html>
 <head>
     <title>File Uploader</title>
+    <style>
+        #loading {
+            display: none;
+            margin: 10px 0;
+            text-align: center;
+        }
+        #success {
+            display: none;
+            color: green;
+            font-weight: bold;
+        }
+        #error {
+            display: none;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Upload File</h1>
@@ -9,10 +26,16 @@
         <input type="file" id="fileInput" name="file">
         <button type="submit">Upload</button>
     </form>
-    <div id="response"></div>
+    <div id="loading">Đang xử lý, vui lòng chờ...</div>
+    <div id="success">Tải lên thành công! File đã được xử lý.</div>
+    <div id="error"></div>
 
     <script>
         const form = document.getElementById('uploadForm');
+        const loading = document.getElementById('loading');
+        const success = document.getElementById('success');
+        const errorDiv = document.getElementById('error');
+
         form.onsubmit = async (e) => {
             e.preventDefault();
             const file = document.getElementById('fileInput').files[0];
@@ -20,6 +43,10 @@
                 alert("No file selected!");
                 return;
             }
+
+            loading.style.display = 'block';
+            success.style.display = 'none';
+            errorDiv.style.display = 'none';
 
             const formData = new FormData();
             formData.append('file', file);
@@ -29,6 +56,8 @@
                     method: 'POST',
                     body: formData
                 });
+
+                loading.style.display = 'none';
 
                 if (response.ok) {
                     const blob = await response.blob();
@@ -40,11 +69,16 @@
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);
+                    success.style.display = 'block';
                 } else {
                     const error = await response.json();
-                    document.getElementById('response').innerText = JSON.stringify(error);
+                    errorDiv.innerText = JSON.stringify(error);
+                    errorDiv.style.display = 'block';
                 }
             } catch (err) {
+                loading.style.display = 'none';
+                errorDiv.innerText = "Đã xảy ra lỗi: " + err.message;
+                errorDiv.style.display = 'block';
                 console.error(err);
             }
         };
