@@ -5,5 +5,12 @@
         "src": "api/main.py",
         "use": "@vercel/python"
       }
+    ],
+    "routes": [
+      {
+        "src": "/upload",
+        "dest": "api/main.py"
+      }
     ]
   }
+  
