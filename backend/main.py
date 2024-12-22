@@ -2,6 +2,7 @@ from flask import Flask, request, send_file, jsonify
 from file_processing import process_file
 import os
 import logging
+import tempfile
 
 app = Flask(__name__)
 
@@ -15,9 +16,8 @@ logging.basicConfig(
     ]
 )
 
-# Đường dẫn tạm để lưu file xử lý
-UPLOAD_FOLDER = "uploaded_files"
-PROCESSED_FOLDER = "processed_files"
+UPLOAD_FOLDER = "/tmp/uploaded_files"
+PROCESSED_FOLDER = "/tmp/processed_files"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(PROCESSED_FOLDER, exist_ok=True)
 
@@ -54,5 +54,4 @@ def upload_file():
             app.logger.info(f"Removed temporary file {input_path}")
 
 if __name__ == '__main__':
-    # Đặt `debug=False` khi triển khai thực tế
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
