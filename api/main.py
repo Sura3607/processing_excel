@@ -1,5 +1,5 @@
 from flask import Flask, request, send_file, jsonify
-from backend.file_processing import process_file
+from api.file_processing import process_file
 import os
 
 app = Flask(__name__)
